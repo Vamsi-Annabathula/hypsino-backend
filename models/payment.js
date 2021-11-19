@@ -12,10 +12,6 @@ const paymentSchema = new Schema(
       required: true,
       trim: true,
     },
-    winnings: {
-      type: Number,
-      default: 0,
-    },
   },
   { timestamps: true, collection: "User" }
 );

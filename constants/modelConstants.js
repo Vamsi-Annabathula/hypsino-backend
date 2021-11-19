@@ -1,4 +1,4 @@
-export const role = {
-    0: 'player',
-    1: 'dealer'
+exports.role = {
+    'player': 0,
+    'dealer': 1
 }

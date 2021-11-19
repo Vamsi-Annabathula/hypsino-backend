@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
 const paymentRoutes = require("./routes/payment");
+const userRoutes = require("./routes/user");
 
 const { PORT, DATABASE, NODE_ENV } = require("./config/serverConfig");
 const IN_PROD = NODE_ENV === "production";
@@ -21,6 +22,7 @@ app.use(cors());
 //Routes
 app.use("/api", authRoutes);
 app.use("/api", paymentRoutes);
+app.use("/api", userRoutes);
 
 const startApp = async () => {
   try {
