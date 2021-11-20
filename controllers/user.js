@@ -49,28 +49,7 @@ exports.getAllDealers = (req, res) => {
   });
 };
 
-exports.updateUser = (req, res) => {
-  User.findByIdAndUpdate(
-    {
-      _id: req.profile._id,
-    },
-    {
-      $set: req.body,
-    },
-    {
-      new: true,
-      useFindAndModify: false,
-    },
-    (err, user) => {
-      if (err) {
-        return res.status(400).json({
-          message: err,
-        });
-      }
-      return res.status(200).json(user);
-    }
-  );
-};
+
 
 exports.recharge = (req, res) => {
   User.findByIdAndUpdate(

@@ -28,6 +28,14 @@ const rouletteSchema = new Schema(
         ref: "Bet",
       },
     ],
+    status:{
+      type: String,
+      default: "Open",
+      enum:[
+        "Open",
+        "Closed"
+      ]
+    }
   },
   { timestamps: true, collection: "Roulette" }
 );

@@ -7,14 +7,14 @@ const {
   getUser,
   getAllDealers,
   getAllUsers,
-  updateUser,
   recharge
 } = require("../controllers/user");
 
 router.param("userId", getUserById);
 
+
+
 router.get("/user/:userId", getUser);
-router.put("/editUser/:userId", updateUser);
 
 router.put("/user/recharge/:userId", recharge);
 

@@ -9,6 +9,7 @@ const gameSchema = new Schema(
       maxlength: 32,
       trim: true,
       unique: true,
+      required: true
     },
     registrationAmount: {
       type: Number,

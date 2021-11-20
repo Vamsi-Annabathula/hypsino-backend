@@ -3,7 +3,18 @@ const { check } = require("express-validator");
 
 const router = express.Router();
 
-const { signup, test, signin, signout } = require("../controllers/auth");
+const {
+  signup,
+  test,
+  updateUser,
+  signin,
+  signout,
+} = require("../controllers/auth");
+const { getUserById } = require("../controllers/user");
+
+
+router.param("userId", getUserById);
+
 
 router.post(
   "/signup",
@@ -16,6 +27,9 @@ router.post(
   signup
 );
 router.get("/", test);
+
+router.put("/editUser/:userId", updateUser);
+
 // router.post(
 //   "/signin",
 //   [
