@@ -18,6 +18,11 @@ const userSchema = new Schema(
     role: {
       type: Number,
       default: 0,
+      required: true,
+    },
+    wallet: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true, collection: "User" }

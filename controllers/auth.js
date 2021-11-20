@@ -29,6 +29,24 @@ exports.signup = (req, res) => {
   });
 };
 
+exports.isAdmin = (req, res, next) => {
+	if (req.profile.role != 2) {
+		return res.status(403).json({
+			error: "Not authorized to perform this operation"
+		});
+	}
+	next();
+};
+
+exports.isDealer = (req, res, next) => {
+	if (req.profile.role === 0) {
+		return res.status(403).json({
+			error: "Not authorized to perform this operation"
+		});
+	}
+	next();
+};
+
 exports.test = (req, res) => {
   res.send("Hey There");
 };
