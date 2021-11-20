@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 const { Schema } = mongoose;
+const { status } = require("../constants/modelConstants");
 
 const rouletteSchema = new Schema(
   {
@@ -28,14 +29,10 @@ const rouletteSchema = new Schema(
         ref: "Bet",
       },
     ],
-    status:{
+    status: {
       type: String,
-      default: "Open",
-      enum:[
-        "Open",
-        "Closed"
-      ]
-    }
+      default: status.open,
+    },
   },
   { timestamps: true, collection: "Roulette" }
 );

@@ -1,6 +1,8 @@
+const _ = require("lodash");
 const Game = require("../models/game");
 const User = require("../models/user");
-const _ = require("lodash");
+const Roulette = require("../models/roulette");
+const { status } = require("../constants/modelConstants");
 
 exports.getGameName = (req, res, next, gameName) => {
   Game.findOne({ name: gameName }).exec((err, game) => {
@@ -51,6 +53,7 @@ exports.getAllGames = (req, res) => {
 exports.registerGameAsDealer = async (req, res) => {
   let dealer = new User(req.profile);
   let game = new Game(req.game);
+  let roulette = new Roulette();
 
   const isDealerExists = game.dealer?.find((ele) => {
     if (_.isEqual(ele, dealer._id)) {
@@ -59,6 +62,7 @@ exports.registerGameAsDealer = async (req, res) => {
   });
 
   if (isDealerExists == undefined) {
+    //payment for registration
     if (dealer.wallet < game.registrationAmount) {
       return res.status(400).json({
         error: "Insufficient Balance, Please recharge your wallet",
@@ -83,6 +87,18 @@ exports.registerGameAsDealer = async (req, res) => {
           }
         }
       );
+
+      //adding dealer to roulette
+      roulette.dealer = dealer;
+      roulette.save((err, game) => {
+        if (err) {
+          return res.status(400).json({
+            error: "Internal error occured",
+          });
+        }
+      });
+
+      //updating game details
       game.dealer?.push(dealer);
       game.save((err, game) => {
         if (err) {
