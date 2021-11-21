@@ -19,11 +19,8 @@ exports.getUserById = (req, res, next, id) => {
 };
 
 exports.getUser = (req, res) => {
-  return res.status(200).json({
-    name: req.profile.name,
-    email: req.profile.email,
-    id: req.profile._id,
-  });
+  const user = new User(req.profile);
+  return res.status(200).json(user);
 };
 
 exports.getAllUsers = (req, res) => {
@@ -55,7 +52,7 @@ exports.recharge = (req, res) => {
       _id: req.profile._id,
     },
     {
-      $set: { wallet: req.profile.wallet +  req.body.wallet },
+      $set: { wallet: req.profile.wallet + req.body.wallet },
     },
     {
       new: true,

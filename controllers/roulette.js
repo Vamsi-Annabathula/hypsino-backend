@@ -28,6 +28,12 @@ exports.enterRoom = async (req, res) => {
     .exec();
   const participationFee = req.game.participationFee;
 
+  if (room == undefined) {
+    return res.status(400).json({
+      message: "Wrong Dealer",
+    });
+  }
+
   console.log(room);
   const isParticipantAllowed = room.bets.find((ele) => {
     if (_.isEqual(ele.participant._id, participant._id)) {
@@ -163,6 +169,12 @@ exports.rewards = async (req, res) => {
     .exec();
   let room = await Roulette.findOne({ dealer: req.body.id }).exec();
 
+  if (room == undefined) {
+    return res.status(400).json({
+      message: "Wrong Dealer",
+    });
+  }
+  
   if (room.thrownNumber == bet.betNumber) {
     //updating user wallet
     User.findByIdAndUpdate(

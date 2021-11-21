@@ -22,9 +22,7 @@ exports.signup = (req, res) => {
       }
     }
     res.status(200).json({
-      name: user.name,
-      email: user.email,
-      id: user._id,
+      user,
     });
   });
 };
@@ -53,21 +51,21 @@ exports.updateUser = (req, res) => {
 };
 
 exports.isAdmin = (req, res, next) => {
-	if (req.profile.role != 2) {
-		return res.status(403).json({
-			error: "Not authorized to perform this operation"
-		});
-	}
-	next();
+  if (req.profile.role != 2) {
+    return res.status(403).json({
+      error: "Not authorized to perform this operation",
+    });
+  }
+  next();
 };
 
 exports.isDealer = (req, res, next) => {
-	if (req.profile.role === 0) {
-		return res.status(403).json({
-			error: "Not authorized to perform this operation"
-		});
-	}
-	next();
+  if (req.profile.role === 0) {
+    return res.status(403).json({
+      error: "Not authorized to perform this operation",
+    });
+  }
+  next();
 };
 
 exports.test = (req, res) => {
