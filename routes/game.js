@@ -16,7 +16,7 @@ router.param("userId", getUserById);
 router.param("gameName", getGameName);
 
 //get routes
-router.get("/game/getAll", getAllGames);
+router.get("/game/get-all", getAllGames);
 router.get("/game/dealers/:gameName", getGameDealers);
 
 //create routes

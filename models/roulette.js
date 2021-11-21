@@ -8,7 +8,7 @@ const rouletteSchema = new Schema(
     thrownNumber: {
       type: Number,
       trim: true,
-      min: 0,
+      min: 1,
       max: 36,
     },
     startTime: {

@@ -18,8 +18,11 @@ const betSchema = new Schema(
       type: ObjectId,
       ref: "User",
     },
+    status:{
+      type: String,
+    }
   },
   { timestamps: true, collection: "Bet" }
 );
 
-module.exports = mongoose.model("bet", betSchema);
+module.exports = mongoose.model("Bet", betSchema);

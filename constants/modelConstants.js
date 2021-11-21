@@ -10,3 +10,12 @@ exports.status = {
   opentobet: "OpenToBet",
   closedtobet: "ClosedToBet",
 };
+
+exports.betStatus = {
+  win: "win",
+  loss: "loss",
+};
+
+exports.minNumber = 1;
+
+exports.maxNumber = 36;

@@ -55,7 +55,7 @@ exports.registerGameAsDealer = async (req, res) => {
   let game = new Game(req.game);
   let roulette = new Roulette();
 
-  const isDealerExists = game.dealer?.find((ele) => {
+  const isDealerExists = game.dealer.find((ele) => {
     if (_.isEqual(ele, dealer._id)) {
       return ele;
     }
@@ -68,6 +68,7 @@ exports.registerGameAsDealer = async (req, res) => {
         error: "Insufficient Balance, Please recharge your wallet",
       });
     } else {
+      //updating user wallet
       User.findByIdAndUpdate(
         {
           _id: req.profile._id,
@@ -79,12 +80,13 @@ exports.registerGameAsDealer = async (req, res) => {
           new: true,
           useFindAndModify: false,
         },
-        (err, dealer) => {
+        (err, user) => {
           if (err) {
             return res.status(400).json({
               message: err,
             });
           }
+          //res.status(200).send(`Wallet is successfully recharged!`);
         }
       );
 

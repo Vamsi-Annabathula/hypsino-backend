@@ -28,7 +28,7 @@ router.post(
 );
 router.get("/", test);
 
-router.put("/editUser/:userId", updateUser);
+router.put("/edit-user/:userId", updateUser);
 
 // router.post(
 //   "/signin",

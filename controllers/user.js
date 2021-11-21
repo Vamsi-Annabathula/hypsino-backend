@@ -1,6 +1,5 @@
 const User = require("../models/user");
 const { role } = require("../constants/modelConstants");
-const { addBalance } = require("../functions/wallet");
 
 exports.getUserById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
@@ -49,15 +48,14 @@ exports.getAllDealers = (req, res) => {
   });
 };
 
-
-
 exports.recharge = (req, res) => {
+  //updating user wallet
   User.findByIdAndUpdate(
     {
       _id: req.profile._id,
     },
     {
-      $set: { wallet: addBalance(req.body.wallet, req.profile.wallet) },
+      $set: { wallet: req.profile.wallet +  req.body.wallet },
     },
     {
       new: true,
@@ -69,11 +67,7 @@ exports.recharge = (req, res) => {
           message: err,
         });
       }
-      return res
-        .status(200)
-        .send(
-          `Wallet is successfully recharged with ${req.body.wallet}. Total Balance is: ${user.wallet}`
-        );
+      res.status(200).send(`Wallet is successfully recharged!`);
     }
   );
 };
