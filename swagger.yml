@@ -1,0 +1,25 @@
+swagger: "2.0"
+info:
+  description: "Hypsino NODEJS backend API"
+  version: "1.0.0"
+  title: "Hypsino API"
+  termsOfService: ""
+  contact:
+    email: ""
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api"
+schemes:
+- "http"
+paths:
+  /users:
+    get:
+      tags:
+      - "gets all users"
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Error"

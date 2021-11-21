@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const YAML = require("yamljs");
+const swaggerUi = require("swagger-ui-express");
 
 const authRoutes = require("./routes/auth");
 const roulleteRoutes = require("./routes/roulette");
@@ -19,6 +21,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
+
+//swagger
+const swaggerDocument = YAML.load("./swagger.yml");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Routes
 app.use("/api", authRoutes);
