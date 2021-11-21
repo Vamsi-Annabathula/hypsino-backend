@@ -5,8 +5,9 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
-const paymentRoutes = require("./routes/payment");
+const roulleteRoutes = require("./routes/roulette");
 const userRoutes = require("./routes/user");
+const gameRoutes = require("./routes/game");
 
 const { PORT, DATABASE, NODE_ENV } = require("./config/serverConfig");
 const IN_PROD = NODE_ENV === "production";
@@ -21,8 +22,9 @@ app.use(cors());
 
 //Routes
 app.use("/api", authRoutes);
-app.use("/api", paymentRoutes);
+app.use("/api", roulleteRoutes);
 app.use("/api", userRoutes);
+app.use("/api", gameRoutes);
 
 const startApp = async () => {
   try {

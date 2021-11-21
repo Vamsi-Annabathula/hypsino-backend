@@ -29,6 +29,47 @@ exports.signup = (req, res) => {
   });
 };
 
+exports.updateUser = (req, res) => {
+  User.findByIdAndUpdate(
+    {
+      _id: req.profile._id,
+    },
+    {
+      $set: req.body,
+    },
+    {
+      new: true,
+      useFindAndModify: false,
+    },
+    (err, user) => {
+      if (err) {
+        return res.status(400).json({
+          message: err,
+        });
+      }
+      return res.status(200).json(user);
+    }
+  );
+};
+
+exports.isAdmin = (req, res, next) => {
+	if (req.profile.role != 2) {
+		return res.status(403).json({
+			error: "Not authorized to perform this operation"
+		});
+	}
+	next();
+};
+
+exports.isDealer = (req, res, next) => {
+	if (req.profile.role === 0) {
+		return res.status(403).json({
+			error: "Not authorized to perform this operation"
+		});
+	}
+	next();
+};
+
 exports.test = (req, res) => {
   res.send("Hey There");
 };

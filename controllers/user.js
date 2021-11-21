@@ -47,3 +47,27 @@ exports.getAllDealers = (req, res) => {
     res.status(200).json(users);
   });
 };
+
+exports.recharge = (req, res) => {
+  //updating user wallet
+  User.findByIdAndUpdate(
+    {
+      _id: req.profile._id,
+    },
+    {
+      $set: { wallet: req.profile.wallet +  req.body.wallet },
+    },
+    {
+      new: true,
+      useFindAndModify: false,
+    },
+    (err, user) => {
+      if (err) {
+        return res.status(400).json({
+          message: err,
+        });
+      }
+      res.status(200).send(`Wallet is successfully recharged!`);
+    }
+  );
+};
